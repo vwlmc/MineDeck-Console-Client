@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.4
+
+- **Fixes GitHub's automatic build.** MineDeck asked for version 2.10.0 of prismarine-nbt (the library that reads Minecraft's item and world data), but that version and 2.9.0 were never published to npm, where GitHub installs libraries from: the library's publishing broke in March 2026. MineDeck now accepts any version from 2.8.0 up. The only change after 2.8.0 is for reading compressed world files, which MineDeck doesn't do. The full test suite passes with the released versions npm offers (prismarine-nbt 2.8.0, protodef 1.19.0) as well as with the newer ones in the hand-built zip.
+
 ## 1.2.3
 
 - MineDeck's home is now [github.com/vwlmc/MineDeck-Console-Client](https://github.com/vwlmc/MineDeck-Console-Client): the *Source code* button in **Privacy & data** opens it, and the README links to the official downloads.

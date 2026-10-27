@@ -1,7 +1,7 @@
 {
   "name": "minedeck",
   "productName": "MineDeck",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Open-source multi-account Minecraft console client: run several Microsoft accounts on a server, view chat and send messages or commands from any of them.",
   "main": "src/main/main.js",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "minecraft-data": "3.117.0",
     "minecraft-protocol": "github:PrismarineJS/node-minecraft-protocol#dacf62ef40cc559429537a303ac246ee9cede175",
     "mineflayer": "github:PrismarineJS/mineflayer#5a252e6d258882b042e60e21c37d552cdf3b3380",
-    "prismarine-nbt": "2.10.0"
+    "prismarine-nbt": "^2.8.0"
   },
   "devDependencies": {
     "electron": "44.9.3",

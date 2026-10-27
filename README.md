@@ -70,7 +70,7 @@ Sign in with your Microsoft accounts, pick a server and a version, and watch and
 1. Download `MineDeck-<version>-setup.exe` (installer) or `MineDeck-<version>-portable.exe` from the **[Releases page](https://github.com/vwlmc/MineDeck-Console-Client/releases)**. Only download MineDeck from there: copies from anywhere else may have been changed. The first releases are also available as a zip (`MineDeck-<version>-win-x64.zip`): extract it anywhere and run `MineDeck.exe`.
 2. Check the download (optional, but recommended): compare its SHA-256 with `SHA256SUMS.txt` from the release:
    ```powershell
-   Get-FileHash .\MineDeck-1.2.3-win-x64.zip -Algorithm SHA256
+   Get-FileHash .\MineDeck-1.2.4-win-x64.zip -Algorithm SHA256
    ```
 3. The builds are not code-signed (a certificate costs money every year), so the first time Windows may show *"Windows protected your PC"*. Click **More info**, then **Run anyway**.
 
@@ -171,17 +171,17 @@ node test/e2e/ui.e2e.js "$(node -p "require('electron')")" screenshots   # Linux
 
 ### Releases
 
-[`.github/workflows/release.yml`](.github/workflows/release.yml) runs the tests and the end-to-end test, builds the Windows installer and portable app on GitHub's servers, writes `SHA256SUMS.txt`, and records a signed [build provenance attestation](https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations). Pushing a tag such as `v1.2.3` creates a draft release with those files; if a release for that tag was already made by hand, the files are added to it. Anyone can then confirm that a download was built by this repository's workflow:
+[`.github/workflows/release.yml`](.github/workflows/release.yml) runs the tests and the end-to-end test, builds the Windows installer and portable app on GitHub's servers, writes `SHA256SUMS.txt`, and records a signed [build provenance attestation](https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations). Pushing a tag such as `v1.2.4` creates a draft release with those files; if a release for that tag was already made by hand, the files are added to it. Anyone can then confirm that a download was built by this repository's workflow:
 
 ```bash
-gh attestation verify MineDeck-1.2.3-setup.exe --repo vwlmc/MineDeck-Console-Client
+gh attestation verify MineDeck-1.2.4-setup.exe --repo vwlmc/MineDeck-Console-Client
 ```
 
 If you publish a fork, set `"homepage"` in `package.json` to your repository's address (`https://github.com/<owner>/<repo>`), so the *Source code* button in **Privacy & data** points to your code.
 
 ### About the first zips (1.0.x to 1.2.x)
 
-MineDeck 1.0.0 to 1.2.3 were assembled on a machine that could not reach the npm registry, so their dependencies came from each project's GitHub source at the commit of its published release (two exceptions are explained in `package.json` and [`scripts/assemble_deps.py`](scripts/assemble_deps.py)). Every source and commit is listed in [`deps.lock.json`](deps.lock.json), a few stand-ins for packages MineDeck doesn't use are in [`compat/`](compat/README.md), and the Windows zip was packed by [`scripts/package_win_offline.mjs`](scripts/package_win_offline.mjs) from the official Electron 44.9.3 download (checked against Electron's published SHA-256). Releases built by the workflow above are the easiest to verify, so prefer those once the repository is published.
+MineDeck 1.0.0 to 1.2.4 were assembled on a machine that could not reach the npm registry, so their dependencies came from each project's GitHub source at the commit of its published release (two exceptions are explained in `package.json` and [`scripts/assemble_deps.py`](scripts/assemble_deps.py)). Every source and commit is listed in [`deps.lock.json`](deps.lock.json), a few stand-ins for packages MineDeck doesn't use are in [`compat/`](compat/README.md), and the Windows zip was packed by [`scripts/package_win_offline.mjs`](scripts/package_win_offline.mjs) from the official Electron 44.9.3 download (checked against Electron's published SHA-256). Releases built by the workflow above are the easiest to verify, so prefer those once the repository is published.
 
 ## Project layout
 

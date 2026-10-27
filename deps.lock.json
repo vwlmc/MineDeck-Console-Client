@@ -2,7 +2,9 @@
   "_known_differences_from_npm": {
     "node-rsa": "minecraft-protocol asks for ^0.4.2, which has no release tag on GitHub; 1.1.1 is used. It is only used by minecraft-protocol's server code (MineDeck is a client; the tests use it for their local test server).",
     "not installed": "Packages only needed by command-line tools, TypeScript or other platforms are left out: @types/*, nearley's CLI dependencies (commander, moo, railroad-diagrams, randexp), and readable-stream's browser polyfills (abort-controller, buffer, events: Node.js has these built in).",
-    "typed-emitter": "mineflayer asks for ^1.0.0, prismarine-windows for ^2.x; 2.1.0 is installed once. It only provides TypeScript types."
+    "typed-emitter": "mineflayer asks for ^1.0.0, prismarine-windows for ^2.x; 2.1.0 is installed once. It only provides TypeScript types.",
+    "prismarine-nbt": "2.10.0 is used here (its last release commit on GitHub), but 2.9.0 and 2.10.0 were never published to npm, so package.json asks for ^2.8.0 and an npm install gets 2.8.0. The only change after 2.8.0 is reading compressed NBT files with gunzipSync, which MineDeck doesn't do. The test suite passes with both.",
+    "protodef": "1.20.0 is used here (its last release commit on GitHub); it has no release tag, so an npm install may get 1.19.0. The test suite passes with both."
   },
   "aes-js": {
     "commit": "7c9fad4add4b349dcb89a4e2125f37defaef3bc8",

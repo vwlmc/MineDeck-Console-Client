@@ -1,0 +1,297 @@
+{
+  "_known_differences_from_npm": {
+    "node-rsa": "minecraft-protocol asks for ^0.4.2, which has no release tag on GitHub; 1.1.1 is used. It is only used by minecraft-protocol's server code (MineDeck is a client; the tests use it for their local test server).",
+    "not installed": "Packages only needed by command-line tools, TypeScript or other platforms are left out: @types/*, nearley's CLI dependencies (commander, moo, railroad-diagrams, randexp), and readable-stream's browser polyfills (abort-controller, buffer, events: Node.js has these built in).",
+    "typed-emitter": "mineflayer asks for ^1.0.0, prismarine-windows for ^2.x; 2.1.0 is installed once. It only provides TypeScript types."
+  },
+  "aes-js": {
+    "commit": "7c9fad4add4b349dcb89a4e2125f37defaef3bc8",
+    "ref": "v3.1.2",
+    "source": "github:ricmoo/aes-js",
+    "version": "3.1.2"
+  },
+  "ajv": {
+    "source": "npm (published copy)",
+    "version": "6.15.0"
+  },
+  "asn1": {
+    "source": "npm (published copy)",
+    "version": "0.2.6"
+  },
+  "buffer-equal": {
+    "commit": "bc518a2415d77220c58a9038434f7daafaba8ba3",
+    "ref": "v1.0.1",
+    "source": "github:inspect-js/buffer-equal",
+    "version": "1.0.1"
+  },
+  "debug": {
+    "source": "npm (published copy)",
+    "version": "4.4.3"
+  },
+  "endian-toggle": {
+    "source": "compat (see compat/README.md)"
+  },
+  "fast-deep-equal": {
+    "source": "npm (published copy)",
+    "version": "3.1.3"
+  },
+  "fast-json-stable-stringify": {
+    "source": "npm (published copy)",
+    "version": "2.1.0"
+  },
+  "json-schema-traverse": {
+    "source": "npm (published copy)",
+    "version": "0.4.1"
+  },
+  "lodash.merge": {
+    "commit": "5857260e49359f36999a537cb9c380861e36a61c",
+    "source": "github:lodash/lodash (npm-packages branch)",
+    "version": "4.6.2"
+  },
+  "lodash.reduce": {
+    "commit": "5857260e49359f36999a537cb9c380861e36a61c",
+    "source": "github:lodash/lodash (npm-packages branch)",
+    "version": "4.6.0"
+  },
+  "macaddress": {
+    "commit": "8deea57be8a4c404006d6a2885473a903fb92402",
+    "ref": "0.5.3",
+    "source": "github:scravy/node-macaddress",
+    "version": "0.5.2"
+  },
+  "minecraft-data": {
+    "commit": "94b717a14e167afdbcdfe708f40f7eed8917fe08",
+    "ref": "3.117.0",
+    "source": "github:PrismarineJS/node-minecraft-data",
+    "version": "3.117.0"
+  },
+  "minecraft-data (data files)": {
+    "commit": "15411f050f040e4c5df09352a75a9912ad8c3eeb",
+    "note": "Java Edition data for 56 versions (1.7 to 26.1)",
+    "source": "github:PrismarineJS/minecraft-data"
+  },
+  "minecraft-folder-path": {
+    "source": "compat (see compat/README.md)"
+  },
+  "minecraft-protocol": {
+    "commit": "dacf62ef40cc559429537a303ac246ee9cede175",
+    "ref": "dacf62ef40cc559429537a303ac246ee9cede175",
+    "source": "github:PrismarineJS/node-minecraft-protocol",
+    "version": "1.68.0"
+  },
+  "mineflayer": {
+    "commit": "5a252e6d258882b042e60e21c37d552cdf3b3380",
+    "ref": "5a252e6d258882b042e60e21c37d552cdf3b3380",
+    "source": "github:PrismarineJS/mineflayer",
+    "version": "4.39.0"
+  },
+  "mojangson": {
+    "commit": "626a05fc0b28d10a6d607fc82e59dbc41c352d7b",
+    "note": "grammar.js compiled from grammar.ne with nearley (moo v0.5.2 used at build time only)",
+    "ref": "2.1.0",
+    "source": "github:PrismarineJS/node-mojangson",
+    "version": "2.1.0"
+  },
+  "ms": {
+    "source": "npm (published copy)",
+    "version": "2.1.3"
+  },
+  "nearley": {
+    "commit": "aa39ac4ff36054b8c6276ce0c098e13dbb4a18a7",
+    "ref": "aa39ac4ff36054b8c6276ce0c098e13dbb4a18a7",
+    "source": "github:kach/nearley",
+    "version": "2.20.1"
+  },
+  "node-fetch": {
+    "source": "compat (see compat/README.md)"
+  },
+  "node-rsa": {
+    "commit": "b7c743d5cd4d35e462b533ba6a3c78eb24dd2589",
+    "ref": "1.1.1",
+    "source": "github:rzcoder/node-rsa",
+    "version": "1.1.1"
+  },
+  "prismarine-auth": {
+    "source": "compat (see compat/README.md)"
+  },
+  "prismarine-biome": {
+    "commit": "57051697f91356c840f961e1bc650b4ff976576e",
+    "ref": "1.4.0",
+    "source": "github:PrismarineJS/prismarine-biome",
+    "version": "1.4.0"
+  },
+  "prismarine-block": {
+    "commit": "c52fba46b794429d89806bd63bb0e9de1be8f981",
+    "ref": "1.23.0",
+    "source": "github:PrismarineJS/prismarine-block",
+    "version": "1.23.0"
+  },
+  "prismarine-chat": {
+    "commit": "cd9e437aee4aae57b38b163a45fbc026fd6f58d3",
+    "ref": "1.13.0",
+    "source": "github:PrismarineJS/prismarine-chat",
+    "version": "1.13.0"
+  },
+  "prismarine-chunk": {
+    "commit": "ce60c5fcd09c6198e28de011eec3f8811b96923d",
+    "ref": "1.41.0",
+    "source": "github:PrismarineJS/prismarine-chunk",
+    "version": "1.41.0"
+  },
+  "prismarine-entity": {
+    "commit": "4f2678f704d3aaa46c1ee8045a1e92d9b48dd937",
+    "ref": "2.6.0",
+    "source": "github:PrismarineJS/prismarine-entity",
+    "version": "2.6.0"
+  },
+  "prismarine-item": {
+    "commit": "e734157ec9153b1f4ca5d921c9ddaa2bc8ca880b",
+    "ref": "1.18.0",
+    "source": "github:PrismarineJS/prismarine-item",
+    "version": "1.18.0"
+  },
+  "prismarine-nbt": {
+    "commit": "02ee0e80f1b247622b117772c769bae4309c1d32",
+    "ref": "02ee0e80f1b247622b117772c769bae4309c1d32",
+    "source": "github:PrismarineJS/prismarine-nbt",
+    "version": "2.10.0"
+  },
+  "prismarine-physics": {
+    "commit": "a5353a922f1dee075aa797cb53be31919f9e1f46",
+    "ref": "1.11.1",
+    "source": "github:PrismarineJS/prismarine-physics",
+    "version": "1.11.1"
+  },
+  "prismarine-physics/node_modules/vec3": {
+    "commit": "3d6b2dc99b78b7c6280ff13f8067bb2ccda7c4e2",
+    "ref": "0.2.0",
+    "source": "github:PrismarineJS/node-vec3"
+  },
+  "prismarine-realms": {
+    "commit": "39787ccf0109e0135c8968b0d0e81f4ebbeac200",
+    "ref": "1.6.0",
+    "source": "github:PrismarineJS/prismarine-realms",
+    "version": "1.6.0"
+  },
+  "prismarine-recipe": {
+    "commit": "3ef96a62b21dcf899a0c5ac28ccd430db1b494d3",
+    "ref": "1.5.0",
+    "source": "github:PrismarineJS/prismarine-recipe",
+    "version": "1.5.0"
+  },
+  "prismarine-registry": {
+    "commit": "e4a2a9f2a9696939bff7d4ca4f7ffef5c1bb1c94",
+    "ref": "1.12.0",
+    "source": "github:PrismarineJS/prismarine-registry",
+    "version": "1.12.0"
+  },
+  "prismarine-windows": {
+    "commit": "173c4dbdc39622b3fbfab768277d173b81f704e6",
+    "ref": "2.10.0",
+    "source": "github:PrismarineJS/prismarine-windows",
+    "version": "2.10.0"
+  },
+  "prismarine-world": {
+    "commit": "66d4a32515a767bfeb2867d77ae348776467d904",
+    "ref": "3.7.0",
+    "source": "github:PrismarineJS/prismarine-world",
+    "version": "3.7.0"
+  },
+  "process": {
+    "commit": "557aa46f283caccce603dbb9c376b3d81067c510",
+    "ref": "v0.11.10",
+    "source": "github:defunctzombie/node-process",
+    "version": "0.11.10"
+  },
+  "protodef": {
+    "commit": "9ad8d34bb978637d99132a0af1f7f2ab3b282fb1",
+    "ref": "9ad8d34bb978637d99132a0af1f7f2ab3b282fb1",
+    "source": "github:ProtoDef-io/node-protodef",
+    "submodules": {
+      "ProtoDef": {
+        "commit": "8e07785e94626882fa3333184bb366e3f6625356",
+        "url": "https://github.com/ProtoDef-io/ProtoDef.git"
+      }
+    },
+    "version": "1.20.0"
+  },
+  "protodef-validator": {
+    "commit": "57d83e7230969a50a01dcba8ed72e3f9a9e3d39e",
+    "ref": "1.5.0",
+    "source": "github:ProtoDef-io/node-protodef-validator",
+    "submodules": {
+      "ProtoDef": {
+        "commit": "8e07785e94626882fa3333184bb366e3f6625356",
+        "url": "https://github.com/ProtoDef-io/ProtoDef.git"
+      }
+    },
+    "version": "1.5.0"
+  },
+  "punycode": {
+    "source": "npm (published copy)",
+    "version": "2.3.1"
+  },
+  "readable-stream": {
+    "commit": "88df21041dc26c210fab3e074ab6bb681a604b8e",
+    "ref": "v4.7.0",
+    "source": "github:nodejs/readable-stream",
+    "version": "4.7.0"
+  },
+  "safe-buffer": {
+    "commit": "e4d9032c56faa8a024dce8b501b4e31d5c2ab300",
+    "ref": "v5.2.1",
+    "source": "github:feross/safe-buffer",
+    "version": "5.2.1"
+  },
+  "safer-buffer": {
+    "source": "npm (published copy)",
+    "version": "2.1.2"
+  },
+  "smart-buffer": {
+    "source": "npm (published copy)",
+    "version": "4.2.0"
+  },
+  "string_decoder": {
+    "commit": "1f29dd715a6c829da89e869af7dafc231c20ed9f",
+    "ref": "v1.3.0",
+    "source": "github:nodejs/string_decoder",
+    "version": "1.3.0"
+  },
+  "typed-emitter": {
+    "commit": "9a139b6fa0ec6b0db6141b5b756b784e4f7ef4e4",
+    "ref": "v2.1.0",
+    "source": "github:andywer/typed-emitter",
+    "version": "2.1.0"
+  },
+  "uint4": {
+    "source": "compat (see compat/README.md)"
+  },
+  "uri-js": {
+    "source": "npm (published copy)",
+    "version": "4.4.1"
+  },
+  "uuid": {
+    "source": "compat (see compat/README.md)"
+  },
+  "uuid-1345": {
+    "commit": "0005376d92673c6e0f620dc08cc603bdd5a28bbb",
+    "ref": "1.0.2",
+    "source": "github:scravy/uuid-1345",
+    "version": "1.0.2"
+  },
+  "vec3": {
+    "commit": "380206869759c541e08a1884a7c313077dc6ae59",
+    "ref": "0.1.9",
+    "source": "github:PrismarineJS/node-vec3",
+    "version": "0.1.9"
+  },
+  "xxhash-wasm": {
+    "source": "compat (see compat/README.md)"
+  },
+  "yggdrasil": {
+    "commit": "65b8ee52502c9a62a0c390f41b6131d1087d3b14",
+    "ref": "1.8.0",
+    "source": "github:PrismarineJS/node-yggdrasil",
+    "version": "1.8.0"
+  }
+}

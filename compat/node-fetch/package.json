@@ -1,0 +1,7 @@
+{
+  "name": "node-fetch",
+  "version": "2.7.0-minedeck",
+  "description": "MineDeck compat module: forwards node-fetch v2 calls to the fetch() built into Electron's Node.js runtime.",
+  "main": "index.js",
+  "license": "MIT"
+}

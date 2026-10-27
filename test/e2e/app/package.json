@@ -1,0 +1,7 @@
+{
+  "name": "minedeck-e2e",
+  "productName": "MineDeck",
+  "version": "1.0.0",
+  "private": true,
+  "main": "entry.js"
+}

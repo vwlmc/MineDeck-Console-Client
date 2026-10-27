@@ -1,0 +1,7 @@
+{
+  "name": "uint4",
+  "version": "0.1.2-minedeck",
+  "description": "MineDeck compat module: read/write 4-bit unsigned values; cursor is a byte offset where .5 means the high nibble.",
+  "main": "index.js",
+  "license": "MIT"
+}

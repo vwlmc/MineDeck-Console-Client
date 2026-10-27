@@ -1,0 +1,7 @@
+{
+  "name": "endian-toggle",
+  "version": "0.0.0-minedeck",
+  "description": "MineDeck compat module: swap the byte order of every `bits`-sized word in a buffer.",
+  "main": "index.js",
+  "license": "MIT"
+}

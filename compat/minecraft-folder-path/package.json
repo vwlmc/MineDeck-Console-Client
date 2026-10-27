@@ -1,0 +1,7 @@
+{
+  "name": "minecraft-folder-path",
+  "version": "1.2.0-minedeck",
+  "description": "MineDeck compat module: the path of the .minecraft folder (MineDeck never reads or writes it).",
+  "main": "index.js",
+  "license": "MIT"
+}

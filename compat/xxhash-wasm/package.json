@@ -1,0 +1,7 @@
+{
+  "name": "xxhash-wasm",
+  "version": "0.4.2-minedeck",
+  "description": "MineDeck compat module: placeholder. Only Bedrock Edition chunk code uses xxhash-wasm; MineDeck only joins Java Edition servers.",
+  "main": "index.js",
+  "license": "MIT"
+}

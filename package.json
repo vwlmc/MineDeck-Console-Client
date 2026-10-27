@@ -1,0 +1,105 @@
+{
+  "name": "minedeck",
+  "productName": "MineDeck",
+  "version": "1.2.3",
+  "description": "Open-source multi-account Minecraft console client: run several Microsoft accounts on a server, view chat and send messages or commands from any of them.",
+  "main": "src/main/main.js",
+  "license": "MIT",
+  "author": "vwl",
+  "homepage": "https://github.com/vwlmc/MineDeck-Console-Client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vwlmc/MineDeck-Console-Client.git"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test --test-concurrency=1 \"test/*.test.js\"",
+    "dist": "electron-builder --publish never",
+    "dist:win": "electron-builder --win --publish never"
+  },
+  "dependencies": {
+    "minecraft-data": "3.117.0",
+    "minecraft-protocol": "github:PrismarineJS/node-minecraft-protocol#dacf62ef40cc559429537a303ac246ee9cede175",
+    "mineflayer": "github:PrismarineJS/mineflayer#5a252e6d258882b042e60e21c37d552cdf3b3380",
+    "prismarine-nbt": "2.10.0"
+  },
+  "devDependencies": {
+    "electron": "44.9.3",
+    "electron-builder": "26.17.0"
+  },
+  "build": {
+    "appId": "app.minedeck.client",
+    "productName": "MineDeck",
+    "copyright": "Made by vwl. MIT License.",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**",
+      "assets/**",
+      "package.json",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "asar": true,
+    "electronFuses": {
+      "runAsNode": false,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": false
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "MineDeck-${version}-setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "MineDeck-${version}-portable.exe"
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "category": "public.app-category.games",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Game",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "electronLanguages": [
+      "en-US",
+      "en-GB"
+    ]
+  }
+}

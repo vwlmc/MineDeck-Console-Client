@@ -1,0 +1,7 @@
+{
+  "name": "prismarine-auth",
+  "version": "3.1.1-minedeck",
+  "description": "MineDeck compat module: placeholder. MineDeck signs in with its own code in src/main/auth and never uses prismarine-auth.",
+  "main": "index.js",
+  "license": "MIT"
+}

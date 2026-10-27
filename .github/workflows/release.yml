@@ -1,0 +1,119 @@
+# Builds MineDeck from this repository's source on GitHub's servers, so anyone
+# can check that a release was made from the published code:
+#   - runs the test suite (including the end-to-end UI and security checks)
+#   - builds the Windows installer and portable .exe with electron-builder
+#   - publishes SHA-256 checksums and a signed build-provenance attestation
+#     (verify with: gh attestation verify MineDeck-<version>-setup.exe --repo <owner>/<repo>)
+# Pushing a tag like v1.0.0 creates a draft GitHub release with the files (or adds them
+# to the release, if one was already made for that tag on GitHub's website).
+name: Build and release
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; else npm install --no-audit --no-fund; fi
+      - name: Check the dependency tree
+        run: node scripts/check_deps.js
+      - name: Unit and integration tests
+        run: npm test
+      - name: End-to-end UI test
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          xvfb-run -a -s "-screen 0 1600x1000x24" node test/e2e/ui.e2e.js "$(node -p "require('electron')")" e2e-screenshots
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: e2e-screenshots
+          if-no-files-found: ignore
+      - name: Keep the resolved package-lock.json
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: package-lock
+          path: package-lock.json
+
+  build-windows:
+    needs: test
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Install dependencies
+        shell: bash
+        run: |
+          if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; else npm install --no-audit --no-fund; fi
+      - name: Check the dependency tree
+        run: node scripts/check_deps.js
+      - name: Build installer and portable app
+        run: npx electron-builder --win --x64 --publish never
+      - name: Checksums
+        shell: bash
+        run: |
+          cd dist
+          sha256sum *.exe > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+      - name: Attest build provenance
+        if: github.event_name != 'pull_request'
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: 'dist/*.exe'
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows
+          path: |
+            dist/*.exe
+            dist/SHA256SUMS.txt
+
+  release:
+    needs: build-windows
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: windows
+          path: windows
+      - name: Add the files to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            # a release was already made by hand for this tag: add GitHub's builds to it,
+            # keeping the checksums of any files already there in the same SHA256SUMS.txt
+            if gh release download "$GITHUB_REF_NAME" --pattern SHA256SUMS.txt --dir existing; then
+              # one line per file; for a file in both lists, the new build's checksum wins
+              cat windows/SHA256SUMS.txt existing/SHA256SUMS.txt | awk '!seen[$2]++' > merged.txt
+              mv merged.txt windows/SHA256SUMS.txt
+            fi
+            gh release upload "$GITHUB_REF_NAME" windows/* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" windows/* --draft --title "MineDeck $GITHUB_REF_NAME" \
+              --notes "Built from ${GITHUB_SHA} by GitHub Actions. Checksums are in SHA256SUMS.txt; verify the build with: gh attestation verify <file> --repo ${GITHUB_REPOSITORY}"
+          fi

@@ -1,6 +1,8 @@
 'use strict'
 // Integration tests: real connections to small local test servers.
 // Run with: node --test test/
+// first: Mojang's session server is stubbed through globalThis.fetch, whichever node-fetch is installed
+require('./helpers/route-fetch')
 const test = require('node:test')
 const assert = require('node:assert')
 const net = require('net')

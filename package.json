@@ -1,7 +1,7 @@
 {
   "name": "minedeck",
   "productName": "MineDeck",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Open-source multi-account Minecraft console client: run several Microsoft accounts on a server, view chat and send messages or commands from any of them.",
   "main": "src/main/main.js",
   "license": "MIT",

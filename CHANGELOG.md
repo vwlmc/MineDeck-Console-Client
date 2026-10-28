@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.5
+
+- **GitHub's automatic build, second fix.** One test (the one that checks a sign-in token is only ever sent to Mojang's session server) relied on a detail of the hand-built zip: there, the library that sends web requests (node-fetch) is a small stand-in that the test can watch. A normal install from npm has the real node-fetch, so on GitHub the test's stand-in for Mojang was bypassed and the test timed out. The test now works with both. The app itself is unchanged.
+- The end-to-end UI test now waits for each result (up to a few seconds) instead of checking after a fixed pause, so a slower build machine can't make it fail.
+
 ## 1.2.4
 
 - **Fixes GitHub's automatic build.** MineDeck asked for version 2.10.0 of prismarine-nbt (the library that reads Minecraft's item and world data), but that version and 2.9.0 were never published to npm, where GitHub installs libraries from: the library's publishing broke in March 2026. MineDeck now accepts any version from 2.8.0 up. The only change after 2.8.0 is for reading compressed world files, which MineDeck doesn't do. The full test suite passes with the released versions npm offers (prismarine-nbt 2.8.0, protodef 1.19.0) as well as with the newer ones in the hand-built zip.

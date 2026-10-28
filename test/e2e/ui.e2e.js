@@ -65,7 +65,7 @@ async function main () {
   await win.click('#connect-sel')
   await win.waitForFunction(() => document.querySelector('#acc-count')?.textContent.startsWith('3 of 3'), null, { timeout: 30000 })
   // which accounts to bring back after a restart is saved while MineDeck runs
-  await waitUntil(() => (readConfig().resumeAccounts || []).length === 3, 5000, 'online accounts to be saved')
+  await waitUntil(() => (readConfig().resumeAccounts || []).length === 3, 10000, 'online accounts to be saved')
 
   // server chat with colours, seen by all 3 accounts (merged into one line)
   srv.broadcast('§6[Server] §fWelcome to §aMineDeck§f! §7(§bwiki§7)')
@@ -74,9 +74,9 @@ async function main () {
   // send from the composer
   await win.fill('#chat-input', 'hello from MineDeck')
   await win.press('#chat-input', 'Enter')
-  await sleep(1500)
-  const atServer = srv.received.filter(r => r.message === 'hello from MineDeck').map(r => r.username).sort()
-  if (atServer.join() !== 'Alpha,Bravo,Charlie') throw new Error('server did not receive the message from all 3: ' + atServer)
+  const atServer = () => srv.received.filter(r => r.message === 'hello from MineDeck').map(r => r.username).sort().join()
+  await waitUntil(() => atServer() === 'Alpha,Bravo,Charlie', 10000, 'the message from all 3 accounts')
+    .catch(e => { throw new Error(`${e.message} (the server got it from: ${atServer() || 'nobody'})`) })
   srv.broadcast('§d<Notch> §fhey Alpha, nice base')
   await sleep(400)
   await win.screenshot({ path: path.join(shots, '03-online-chat.png') })
@@ -95,9 +95,10 @@ async function main () {
   await win.click('.chip:has-text("Charlie") .chip-x')
   await win.fill('#chat-input', '/spawn')
   await win.press('#chat-input', 'Enter')
-  await sleep(800)
-  const spawn = srv.received.filter(r => r.message === '/spawn').map(r => r.username)
-  if (spawn.join() !== 'Bravo') throw new Error('only Bravo should send /spawn, got ' + spawn)
+  const spawn = () => srv.received.filter(r => r.message === '/spawn').map(r => r.username).join()
+  await waitUntil(() => spawn() !== '', 8000, 'the /spawn command at the server')
+  await sleep(800) // room for a wrong extra copy to arrive
+  if (spawn() !== 'Bravo') throw new Error('only Bravo should send /spawn, got ' + spawn())
 
   // kick Charlie -> reconnect countdown
   const charlie = Object.values(srv.server.clients).find(c => c.username === 'Charlie')
@@ -118,11 +119,12 @@ async function main () {
   await win.screenshot({ path: path.join(shots, '05b-pov.png') })
   const bravo = Object.values(srv.server.clients).find(c => c.username === 'Bravo')
   await win.mouse.click(900, 480) // takes the mouse (pointer lock)
-  await win.waitForFunction(() => !!document.pointerLockElement, null, { timeout: 5000 })
+  // wait until the POV view has seen the lock too: its pointerlockchange event comes a moment
+  // after document.pointerLockElement is set, and a mouse move before that isn't a look
+  await win.waitForFunction(() => !!document.pointerLockElement?.classList.contains('locked'), null, { timeout: 5000 })
   await win.evaluate(() => document.dispatchEvent(new MouseEvent('mousemove', { movementX: 700, movementY: 0 })))
-  await sleep(300)
-  const facing = await win.evaluate(() => document.querySelector('.pov-info').textContent)
-  if (!/facing west/.test(facing)) throw new Error('moving the mouse right should turn Bravo from south to west: ' + facing)
+  const turned = await win.waitForFunction(() => /facing west/.test(document.querySelector('.pov-info')?.textContent || ''), null, { timeout: 5000 }).then(() => true, () => false)
+  if (!turned) throw new Error('moving the mouse right should turn Bravo from south to west: ' + await win.evaluate(() => document.querySelector('.pov-info')?.textContent))
   await win.keyboard.press('KeyT')
   await win.keyboard.type('!menu')
   await win.keyboard.press('Enter')
@@ -227,7 +229,7 @@ async function main () {
   await second.win.check('#select-all')
   await second.win.click('#disconnect-sel')
   await second.win.waitForFunction(() => document.querySelector('#acc-count')?.textContent.startsWith('0 of 3'), null, { timeout: 10000 })
-  await waitUntil(() => (readConfig().resumeAccounts || []).length === 0, 5000, 'disconnected accounts to be forgotten')
+  await waitUntil(() => (readConfig().resumeAccounts || []).length === 0, 10000, 'disconnected accounts to be forgotten')
 
   // the only console errors expected are the Content-Security-Policy blocks caused by the fetch check above
   const unexpected = errors.filter(e => !/example\.com/.test(e))

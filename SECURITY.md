@@ -106,7 +106,7 @@ Being honest about limits matters as much as the protections:
 - **Run the tests.** `npm test` includes integration tests against local Minecraft test servers, including one that stands in for Mojang's session server and fails if any other host is contacted. The end-to-end test checks the window's isolation (no `require`, no `process`, only two bridge functions, blocked network and blocked unknown calls).
 - **Verify a release.** Releases made by [`.github/workflows/release.yml`](.github/workflows/release.yml) are built on GitHub's servers from the tagged source and come with `SHA256SUMS.txt` and a signed build provenance attestation:
   ```bash
-  gh attestation verify MineDeck-1.2.4-setup.exe --repo vwlmc/MineDeck-Console-Client
+  gh attestation verify MineDeck-1.2.5-setup.exe --repo vwlmc/MineDeck-Console-Client
   ```
 - **Build it yourself** with `npm ci && npm run dist:win` and compare behaviour, or simply use your own build.
 
